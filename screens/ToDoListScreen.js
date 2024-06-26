@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet, Button } from "react-native";
 
 function ToDoListScreen({ navigation }) {
+    //Список дел
 	const toDoList = ([
 		{ id: "1", task: "Сделать домашку" },
 		{ id: "2", task: "Сходить в зал" },
 	]);
-
+    //Вью со списком наших дел и кнопкой для добавления новой задачи
 	return (
 		<View style={styles.container}>
 			<FlatList

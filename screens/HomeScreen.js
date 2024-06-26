@@ -4,6 +4,7 @@ import { View, Text, Button, StyleSheet } from "react-native";
 
 function HomeScreen({ navigation }) {
 	return (
+        //Вью с текстом и двумя кнопками с навигацией на другие страницы
 		<View style={styles.container}>
 			<Text style={styles.title}>To-Do приложение</Text>
 			<Button
@@ -18,6 +19,8 @@ function HomeScreen({ navigation }) {
 	);
 }
 
+
+//Определение стилей
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,

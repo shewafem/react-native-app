@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 function AddToDoScreen({ navigation }) {
-
+    //Вью с текстом, инпутом и кнопкой
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Добавить новую задачу</Text>
@@ -16,6 +16,7 @@ function AddToDoScreen({ navigation }) {
 	);
 }
 
+//Определение стилей
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
