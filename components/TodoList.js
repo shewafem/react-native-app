@@ -1,53 +1,69 @@
-import React, { useState } from "react";
-import { View, TextInput, Button } from "react-native";
+//Импортируем useState hook в самом начале
+import React, { useState, useContext } from "react";
+import { View, TextInput, FlatList, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Button, Icon } from '@rneui/themed';
 import TodoItem from "./TodoItem";
+//Импортируем контекст
+import { TaskContext } from '../TaskContext'
 
-export default function TodoList() {
-	// Хук состояния для наших задач [геттер, сеттер]
-	const [tasks, setTasks] = useState([
-		{ id: 1, text: "Сделать домашку", completed: true },
-		{ id: 2, text: "Сходить в зал", completed: false },
-	]);
 
-	// Хук состояния для текста [геттер, сеттер]
-	const [text, setText] = useState("");
+export default function TodoList () {
 
-	// Функция добавления задачи
-	function addTask() {
-		const newTask = { id: Date.now(), text, completed: false };
-		setTasks([...tasks, newTask]);
-		setText("");
-	}
-	// Функция удаления задачи
-	function deleteTask(id) {
-		setTasks(tasks.filter((task) => task.id !== id));
-	}
-	// Функция для переключения выполнения
-	function toggleCompleted(id) {
-		setTasks(
-			tasks.map((task) =>
-				task.id === id ? { ...task, completed: !task.completed } : task
-			)
-		);
-	}
+	const navigation = useNavigation();
+	//Используем конеткст
+	const { tasks, deleteTask, toggleCompleted } = useContext(TaskContext);
 
-	// Render TodoList Component
+	// Вывод компонента (рендер)
 	return (
-		<View>
-			{tasks.map((task) => (
-				<TodoItem
-					key={task.id}
-					task={task}
-					deleteTask={deleteTask}
-					toggleCompleted={toggleCompleted}
-				/>
-			))}
-			<TextInput
-				value={text}
-				onChangeText={setText}
-				placeholder="Новая задача"
+		<View style={styles.taskContainer}>
+			{/* Используем FlatList для вывода списка однородных компонентов */}
+			<FlatList
+				data={tasks}
+				keyExtractor={(task) => task.id}
+				renderItem={({ item }) => (
+					<TodoItem
+						task={item}
+						deleteTask={deleteTask}
+						toggleCompleted={toggleCompleted}
+					/>
+				)}
 			/>
-			<Button title="Добавить" onPress={addTask} />
+			{/* Инпут для новой задачи который при смене текста вызывает setText */}
+			<View>
+				{/*<TextInput
+					value={text}
+					onChangeText={setText}
+					placeholder="Новая задача"
+					style={styles.input}
+				/>*/}
+				<Button type="primary" titleStyle={styles.buttonTitle} 
+				//При нажатии на кнопку переходим к странице 'AddToDo'
+				buttonStyle={styles.addButton} onPress={() => navigation.navigate("AddToDo")}>Добавить
+				<Icon name='plus-circle' style={styles.btnIcon} type='font-awesome' color="white"/></Button>
+			</View>
 		</View>
 	);
 }
+
+
+//Определение стилей с помощью StyleSheet
+
+const styles = StyleSheet.create({
+	taskContainer: {
+		justifyContent: 'space-between',
+	},
+	addButton: {
+		fontFamily: "ubuntu-mono-regular",
+		backgroundColor: 'rgba(78, 116, 289, 1)',
+		borderRadius: 3,
+		},
+	buttonTitle: {
+		fontSize: 24,
+		color:"white", 
+		fontFamily: 'ubuntu-mono-bold',
+	},
+	btnIcon: {
+		marginLeft: 10,
+	}
+});

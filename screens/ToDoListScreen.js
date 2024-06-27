@@ -4,7 +4,7 @@ import { View, Text, FlatList, StyleSheet, Button } from "react-native";
 import TodoList from "../components/TodoList";
 
 
-function ToDoListScreen({ navigation }) {
+function ToDoListScreen() {
 	//Вью со списком наших дел и кнопкой для добавления новой задачи
 	return (
 		<View style={styles.container}>
