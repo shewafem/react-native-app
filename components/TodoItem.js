@@ -1,9 +1,14 @@
-import React from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity} from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
 //импортируем стильные чекбоксы
 import { CheckBox, Icon, Input } from '@rneui/themed';
+//импортируем навигацию
+import { useNavigation } from "@react-navigation/native";
 
 export default function TodoItem({ task, deleteTask, toggleCompleted }) {
+
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.todoItem}>
 		{/* Чекбокс для переключения задачи в состояние выполнено/не выполнено 
@@ -25,6 +30,13 @@ export default function TodoItem({ task, deleteTask, toggleCompleted }) {
 				{task.text}
 				
 			</Text>
+			<TouchableOpacity
+				//Переход на экран EditToDoScreen.js
+				onPress={() => navigation.navigate("EditToDo", { task })}
+				style={styles.editButton}
+			>
+			<Icon name='edit' type='font-awesome' color="white"/>
+			</TouchableOpacity>
 			<TouchableOpacity
 				//Удаление задачи при нажатии с помощью deleteTask()
 				onPress={() => deleteTask(task.id)}
@@ -71,7 +83,11 @@ const styles = StyleSheet.create({
 	deleteButtonText: {
 		color: '#fff',
 	},
-	checkbox: {
-		
+	editButton: {
+		backgroundColor: 'lightgreen',
+		paddingVertical: 4,
+		paddingHorizontal: 8,
+		borderRadius: 7,
+		marginRight: 10,
 	},
 });

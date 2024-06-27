@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
 import ToDoListScreen from "./screens/ToDoListScreen";
 import AddToDoScreen from "./screens/AddToDoScreen";
+import EditToDoScreen from "./screens/EditToDoScreen";
 import * as SplashScreen from 'expo-splash-screen';
 import {View, StyleSheet, ActivityIndicator } from 'react-native';
 //TaskProvider для использования контекста
@@ -46,7 +47,8 @@ function App() {
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Главная' }}/>
             <Stack.Screen name="ToDoList" component={ToDoListScreen} options={{ title: 'Мой список задач 📝' }}/>
-            <Stack.Screen name="AddToDo" component={AddToDoScreen} options={{ title: 'Добавить задачу' }} />
+            <Stack.Screen name="AddToDo" component={AddToDoScreen} options={{ title: 'Добавление задачи' }}/>
+            <Stack.Screen name="EditToDo" component={EditToDoScreen} options={{ title: 'Редактирование задачи ✍' }}/>
           </Stack.Navigator>
         </NavigationContainer>
       </View>

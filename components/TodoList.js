@@ -11,7 +11,7 @@ import { TaskContext } from '../TaskContext'
 export default function TodoList () {
 
 	const navigation = useNavigation();
-	//Используем конеткст
+	//Подписываемся на контекст с помощью хука useContext
 	const { tasks, deleteTask, toggleCompleted } = useContext(TaskContext);
 
 	// Вывод компонента (рендер)
@@ -29,7 +29,6 @@ export default function TodoList () {
 					/>
 				)}
 			/>
-			{/* Инпут для новой задачи который при смене текста вызывает setText */}
 			<View>
 				{/*<TextInput
 					value={text}
