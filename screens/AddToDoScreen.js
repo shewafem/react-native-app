@@ -27,8 +27,6 @@ function AddToDoScreen() {
 			setText(""); // Очистить инпут после добавления задачи
 			setError(""); // Очистить сообщение об ошибке
 			navigation.navigate("ToDoList");
-		} else {
-			console.error("addTask is undefined");
 		}
 	};
 

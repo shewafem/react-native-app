@@ -42,16 +42,14 @@ function App() {
     наши страницы как стек (т.е. будут накладываться друг на друга)
     Оборачиваем в TaskProvider для доступа контекста в приложении*/
     <TaskProvider>
-      <View style={styles.container} onLayout={onLayoutRootView}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="Home" onLayout={onLayoutRootView}>
             <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Главная' }}/>
             <Stack.Screen name="ToDoList" component={ToDoListScreen} options={{ title: 'Мой список задач 📝' }}/>
             <Stack.Screen name="AddToDo" component={AddToDoScreen} options={{ title: 'Добавление задачи' }}/>
             <Stack.Screen name="EditToDo" component={EditToDoScreen} options={{ title: 'Редактирование задачи ✍' }}/>
           </Stack.Navigator>
         </NavigationContainer>
-      </View>
     </TaskProvider>
   );
 }

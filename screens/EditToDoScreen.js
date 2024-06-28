@@ -36,8 +36,6 @@ function EditToDoScreen() {
             editTask(task.id, text);
             setError(""); // Очистить сообщение об ошибке
             navigation.navigate("ToDoList");
-        } else {
-            console.error("editTask is undefined");
         }
     };
 

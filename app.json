@@ -14,9 +14,10 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-  "NSCameraUsageDescription": "Это приложение требует доступ к камере для добавления фотографий.",
-  "NSPhotoLibraryUsageDescription": "Это приложение требует доступ к вашей фотогалерее для выбора фотографий.",
-  "NSPhotoLibraryAddUsageDescription": "Для сохранения"}
+        "NSCameraUsageDescription": "Это приложение требует доступ к камере для добавления фотографий.",
+        "NSPhotoLibraryUsageDescription": "Это приложение требует доступ к вашей фотогалерее для выбора фотографий.",
+        "NSPhotoLibraryAddUsageDescription": "Для сохранения"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +29,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-router"
     ]
   }
 }

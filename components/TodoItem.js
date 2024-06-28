@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
 //импортируем стильные чекбоксы
 import { CheckBox, Icon, Input } from '@rneui/themed';

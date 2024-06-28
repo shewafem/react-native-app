@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useCallback } from 'react';
 
 export const TaskContext = createContext();
 
@@ -13,36 +13,36 @@ export const TaskProvider = ({ children }) => {
     Создается newTask с введённым текстом, 
     id = текущая дата, не выполнена изначально.
     Далее setTasks добавляет задачу в tasks*/
-    const addTask = (text) => {
+    const addTask = useCallback((text) => {
         const newTask = { id: Date.now(), text, completed: false };
-        setTasks([...tasks, newTask]);
-    };
+        setTasks((prevTasks) => [...prevTasks, newTask]);
+    }, []);
 
     /*Функция для удаления задачи.
     Передается id задачи и фильтр массива tasks*/
-    const deleteTask = (id) => {
-        setTasks(tasks.filter((task) => task.id !== id));
-    };
+    const deleteTask = useCallback((id) => {
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    }, []);
 
     /*Функция переключения состояния задачи.
     Передается id задачи и происходит изменение состояния task*/
-    const toggleCompleted = (id) => {
-        setTasks(
-            tasks.map((task) =>
+    const toggleCompleted = useCallback((id) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
                 task.id === id ? { ...task, completed: !task.completed } : task
             )
         );
-    };
+    }, []);
 
     /*Функция редактирования задачи.
     Передается id задачи и новый текст, происходит изменение текста task*/
-    const editTask = (id, newText) => {
-        setTasks(
-            tasks.map((task) =>
+    const editTask = useCallback((id, newText) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
                 task.id === id ? { ...task, text: newText } : task
             )
         );
-    };
+    }, []);
 
     return (
         /*Определяем TaskProvider который будет давать 
