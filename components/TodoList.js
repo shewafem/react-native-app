@@ -1,6 +1,6 @@
 //Импортируем useState hook в самом начале
 import React, { useState, useContext } from "react";
-import { View, TextInput, FlatList, StyleSheet } from "react-native";
+import { View, Platform, FlatList, StyleSheet, ActionSheetIOS } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Icon } from '@rneui/themed';
 import TodoItem from "./TodoItem";
@@ -14,6 +14,28 @@ export default function TodoList () {
 	//Подписываемся на контекст с помощью хука useContext
 	const { tasks, deleteTask, toggleCompleted } = useContext(TaskContext);
 
+	//Определения окна действий iOS 
+	const showActionSheet = (task) => {
+		//если платформа iOS
+        if (Platform.OS === 'ios') {
+			//показываем окно с опциями
+            ActionSheetIOS.showActionSheetWithOptions(
+                {
+                    options: ["Отменить", "Редактировать", "Удалить"],
+                    destructiveButtonIndex: 2,
+                    cancelButtonIndex: 0,
+                },
+				//выбираем действие с задачей в зависимости от нажатой кнопки
+                buttonIndex => {
+                    if (buttonIndex === 1) {
+                        navigation.navigate("EditToDo", { task });
+                    } else if (buttonIndex === 2) {
+                        deleteTask(task.id);
+                    }
+                }
+            );
+        }
+    };
 	// Вывод компонента (рендер)
 	return (
 		<View style={styles.taskContainer}>
@@ -26,6 +48,8 @@ export default function TodoList () {
 						task={item}
 						deleteTask={deleteTask}
 						toggleCompleted={toggleCompleted}
+						onPress={() => toggleCompleted(item.id)}
+						onLongPress={() => showActionSheet(item)}
 					/>
 				)}
 			/>
