@@ -1,5 +1,5 @@
 //Импортируем useState hook в самом начале
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Platform, FlatList, StyleSheet, ActionSheetIOS } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button, Icon } from '@rneui/themed';

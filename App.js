@@ -8,7 +8,7 @@ import ToDoListScreen from "./screens/ToDoListScreen";
 import AddToDoScreen from "./screens/AddToDoScreen";
 import EditToDoScreen from "./screens/EditToDoScreen";
 import * as SplashScreen from 'expo-splash-screen';
-import {View, StyleSheet, ActivityIndicator } from 'react-native';
+import {View, StyleSheet, ActivityIndicator, Text } from 'react-native';
 //TaskProvider для использования контекста
 import { TaskProvider } from "./TaskContext";
 
@@ -32,6 +32,7 @@ function App() {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" />
+        <Text>Загрузка</Text>
       </View>
     )
   }
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 })
 //экспорт App.js для использования в других файлах

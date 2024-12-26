@@ -1,13 +1,25 @@
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useEffect } from 'react';
 
 export const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
     //Определяем задачи, используем useState hook
-    const [tasks, setTasks] = useState([
-        { id: 1, text: "Сделать домашку", completed: true },
-        { id: 2, text: "Сходить в зал", completed: false },
-    ]);
+    const [tasks, setTasks] = useState([]);
+    
+	useEffect(() => {
+		const temp = localStorage.getItem("tasks")
+		const loadedTasks = JSON.parse(temp)
+
+		if(loadedTasks) {
+			setTasks(loadedTasks)
+		}
+	}, [])
+
+	useEffect(() => {
+		const temp = JSON.stringify(tasks)
+		localStorage.setItem("tasks", temp)
+	}, [tasks])
+
 
     /*Функция для добавления задачи.
     Создается newTask с введённым текстом, 
